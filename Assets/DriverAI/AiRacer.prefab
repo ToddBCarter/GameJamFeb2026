@@ -132,7 +132,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
@@ -150,4 +150,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552a181d4f74e2e469bcd18944fce52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaypointMove
-  Destination: {fileID: 0}
+  Destinations: []
