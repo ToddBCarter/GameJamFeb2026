@@ -7,7 +7,33 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private int TotalLaps = 3;
     [SerializeField] private TMP_Text[] leaderboardTexts;
     [SerializeField] private GameObject leaderboard;
+    [SerializeField] private AudioClip victorySound;
     private int place = 0;
+    private bool victorySequenceStarted = false;
+
+    void Update()
+    {
+        if(leaderboard.activeInHierarchy && !victorySequenceStarted){
+            victorySequenceStarted = true;
+            AudioSource[] allSources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+            foreach (AudioSource source in allSources)
+            {
+                source.Stop();
+            }
+            AudioSource.PlayClipAtPoint(victorySound, Camera.main.transform.position, 1f);
+            //StartCoroutine(PlayVictoryWithDelay(1.0f));
+        }
+    }
+
+    private System.Collections.IEnumerator PlayVictoryWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (victorySound != null)
+        {
+            AudioSource.PlayClipAtPoint(victorySound, Camera.main.transform.position, 1f);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

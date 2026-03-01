@@ -66,7 +66,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        UpdateEngineSound();
+        if (engineSource != null && engineSource.isPlaying)
+        {
+            UpdateEngineSound();
+        }
     }
 
     void UpdateEngineSound()
