@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject pauseMenu2;
 
+    [SerializeField] Timer[] timers;
+
     private bool isPaused = false;
     private InputAction pauseAction;
     private InputAction pauseAction2;
@@ -19,6 +21,11 @@ public class PauseMenu : MonoBehaviour
 
         pauseAction = InputSystem.actions.FindAction("Pause");
         pauseAction2 = InputSystem.actions.FindAction("Pause2");
+
+        for (int i = 0; i < timers.Length; i++)
+        {
+            timers[i].StartTimer();
+        }
     }
 
     void Update()
@@ -50,6 +57,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame(int i)
     {
+        for (int j = 0; j < timers.Length; j++)
+        {
+            timers[j].StartTimer();
+        }
         if (SplitScreenCamera.isMulti && i == 2)
         {
             pauseMenu2.SetActive(false);
@@ -62,22 +73,14 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
             isPaused = false;
         }
-        /*if (SplitScreenCamera.isMulti && i == 1)
-        {
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
-            isPaused = false;
-        }
-        else if(SplitScreenCamera.isMulti && i == 2)
-        {
-            pauseMenu2.SetActive(false);
-            Time.timeScale = 1f;
-            isPaused = false;
-        }*/
     }
 
     public void PauseGame(int i)
     {
+        for (int j = 0; j < timers.Length; j++)
+        {
+            timers[j].StopTimer();
+        }
         if (SplitScreenCamera.isMulti && i == 2)
         {
             pauseMenu2.SetActive(true);
@@ -90,18 +93,6 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
             isPaused = true;
         }
-        /*if (SplitScreenCamera.isMulti && i == 1)
-        {
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-            isPaused = true;
-        }
-        else if (SplitScreenCamera.isMulti && i == 2)
-        {
-            pauseMenu2.SetActive(true);
-            Time.timeScale = 0f;
-            isPaused = true;
-        }*/
     }
     
     public void MainMenu()
