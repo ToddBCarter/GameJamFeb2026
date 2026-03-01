@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float turnSpeed = 80f;
     [SerializeField] private string actionSet;
 
+    private AudioSource engineSource;
+    public float minPitch = 0.2f; // Sound when stopped
+    public float maxPitch = 2.5f; // Sound at top speed
+
     private Rigidbody rb;
     private InputAction moveAction;
 
@@ -19,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
+        engineSource = GetComponent<AudioSource>();
         moveAction = InputSystem.actions.FindAction(actionSet);
     }
 
@@ -58,5 +62,18 @@ public class PlayerMovement : MonoBehaviour
     {
         speedMultiplier = multiplier;
         slowTimer = duration;
+    }
+
+    void Update()
+    {
+        UpdateEngineSound();
+    }
+
+    void UpdateEngineSound()
+    {
+        float currentSpeed = rb.linearVelocity.magnitude; 
+        float speedPercentage = currentSpeed / 20f; 
+
+        engineSource.pitch = Mathf.Lerp(minPitch, maxPitch, speedPercentage);
     }
 }

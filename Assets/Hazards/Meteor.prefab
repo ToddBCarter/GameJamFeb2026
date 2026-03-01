@@ -178,3 +178,4 @@ MonoBehaviour:
   slowMultiplier: 0.5
   slowDuration: 2
   lifetime: 10
+  collectSound: {fileID: 8300000, guid: 67fa4d06abb1b82499316098a5d99128, type: 3}
