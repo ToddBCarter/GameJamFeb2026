@@ -72,7 +72,13 @@ public class HazardsManager : MonoBehaviour
             int zoneActivated = Random.Range(0, meteorSpawnPoints.Length);
             Vector3 spawnPos = meteorSpawnPoints[zoneActivated].position + Vector3.up * height;
 
-            Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+            GameObject meteor = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+            Rigidbody rb = meteor.GetComponent<Rigidbody>();
+            if(rb != null)
+            {
+                rb.linearVelocity = Vector3.down * 30f;
+                rb.angularVelocity += new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
+            }
         }
     }
 }
