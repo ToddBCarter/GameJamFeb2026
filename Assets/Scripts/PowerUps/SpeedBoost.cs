@@ -16,6 +16,7 @@ public class SpeedBoost : MonoBehaviour
     {
         if (other.CompareTag("Racer"))
         {
+            Debug.Log("Racer hit powerup");
             if (collectSound != null)
             {
                 AudioSource.PlayClipAtPoint(collectSound, transform.position);
@@ -23,7 +24,14 @@ public class SpeedBoost : MonoBehaviour
             PlayerMovement movement = other.GetComponentInParent<PlayerMovement>();
             if (movement != null)
             {
+                Debug.Log("it was a player");
                 movement.ModifySpeed(speedMultiplier, duration);
+            } else {
+                WaypointMove movementAI = other.GetComponent<WaypointMove>();
+                if (movementAI != null) {
+                    Debug.Log("it was ai");
+                    movementAI.ModifySpeed(speedMultiplier, duration);
+                }
             }
             
             Destroy(gameObject);

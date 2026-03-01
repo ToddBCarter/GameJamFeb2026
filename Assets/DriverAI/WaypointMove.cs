@@ -16,6 +16,9 @@ public class WaypointMove : MonoBehaviour
     [SerializeField] float smoothingValue = 0.5f;
     private float speedChangeTimer;
 
+    private float speedMultiplier = 1f;
+    private float slowTimer = 0f;
+
     private void SetDestination()
     {
         Vector3 targetVector = Destinations[currentWaypoint].transform.position;
@@ -53,14 +56,39 @@ public class WaypointMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         speedChangeTimer -= Time.deltaTime;
         if (speedChangeTimer <= 0f) {
             float randomOffset = Random.Range(-speedVariance, speedVariance);
-            NavMeshAgent.speed = Mathf.Lerp(NavMeshAgent.speed, (baseSpeed + randomOffset), (Time.deltaTime * smoothingValue));
+            NavMeshAgent.speed = Mathf.Lerp((NavMeshAgent.speed), (baseSpeed + randomOffset), (Time.deltaTime * smoothingValue));
             //Debug.Log("Current speed: " + NavMeshAgent.speed);
         }
+        */
+
+        if (slowTimer > 0f) {
+            slowTimer -= Time.fixedDeltaTime;
+            if (slowTimer <= 0f) {
+                speedMultiplier = 1f;
+            }
+        }
+
+        NavMeshAgent.speed = baseSpeed * speedMultiplier;
+
 
         if (!NavMeshAgent.pathPending && NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance) 
             MoveRoutine();
+
+        Debug.Log("AIRacer current speed: " + NavMeshAgent.speed);
+    }
+
+    public void ModifySpeed(float multiplier, float duration)
+    {
+        speedMultiplier = multiplier;
+        slowTimer = duration;
+    }
+
+    public void SetSpeedMultiplier(float multiplier) 
+    {
+        speedMultiplier = multiplier;
     }
 }

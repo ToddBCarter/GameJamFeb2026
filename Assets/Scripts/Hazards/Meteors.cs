@@ -24,6 +24,11 @@ public class Meteors : MonoBehaviour
         if (movement != null)
         {
             movement.ModifySpeed(slowMultiplier, slowDuration);
+        } else {
+            WaypointMove movementAI = collision.collider.GetComponent<WaypointMove>();
+            if (movementAI != null) {
+                movementAI.ModifySpeed(slowMultiplier, slowDuration);
+            }
         }
 
         Destroy(gameObject);

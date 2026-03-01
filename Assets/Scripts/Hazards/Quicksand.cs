@@ -13,6 +13,11 @@ public class Quicksand : MonoBehaviour
         if (movement != null)
         {
             movement.SetSpeedMultiplier(slowMultiplier);
+        } else {
+            WaypointMove movementAI = other.GetComponent<WaypointMove>();
+            if (movementAI != null) {
+                movementAI.SetSpeedMultiplier(slowMultiplier);
+            }
         }
     }
 
@@ -24,6 +29,11 @@ public class Quicksand : MonoBehaviour
         if (movement != null)
         {
             movement.SetSpeedMultiplier(1f);
+        } else {
+            WaypointMove movementAI = other.GetComponent<WaypointMove>();
+            if (movementAI != null) {
+                movementAI.SetSpeedMultiplier(1f);
+            }
         }
     }
 }
