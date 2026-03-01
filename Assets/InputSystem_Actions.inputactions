@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause2",
+                    "type": "Button",
+                    "id": "eb26a38a-4160-4108-b1eb-3a3e59aba38c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -473,11 +482,22 @@
                 {
                     "name": "",
                     "id": "4a1cddb6-1b06-4a66-ae3c-dfa26f777b65",
-                    "path": "<Keyboard>/p",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7c3fcda-beb3-4779-9ba6-0cc52474620e",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Pause2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

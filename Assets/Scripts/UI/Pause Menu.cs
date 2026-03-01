@@ -9,19 +9,23 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu2;
 
     private bool isPaused = false;
+    private InputAction pauseAction;
+    private InputAction pauseAction2;
 
-    void Start()
+    void Awake()
     {
         pauseMenu.SetActive(false);
         pauseMenu2.SetActive(false);
+
+        pauseAction = InputSystem.actions.FindAction("Pause");
+        pauseAction2 = InputSystem.actions.FindAction("Pause2");
     }
 
     void Update()
     {
-        Debug.Log(1f / Time.deltaTime);
-
-        if (Keyboard.current.tKey.wasPressedThisFrame)
+        if (Keyboard.current.tKey.wasPressedThisFrame || pauseAction.triggered)
         {
+            Debug.Log("Got it pressed");
             if (isPaused)
             {
                 ResumeGame(1);
@@ -31,7 +35,7 @@ public class PauseMenu : MonoBehaviour
                 PauseGame(1);
             }
         }
-        else if (Keyboard.current.pKey.wasPressedThisFrame)
+        else if (Keyboard.current.pKey.wasPressedThisFrame || pauseAction2.triggered)
         {
             if (isPaused)
             {
@@ -46,7 +50,19 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame(int i)
     {
-        if(SplitScreenCamera.isMulti && i == 1)
+        if (SplitScreenCamera.isMulti && i == 2)
+        {
+            pauseMenu2.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+        /*if (SplitScreenCamera.isMulti && i == 1)
         {
             pauseMenu.SetActive(false);
             Time.timeScale = 1f;
@@ -57,12 +73,24 @@ public class PauseMenu : MonoBehaviour
             pauseMenu2.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
-        }
+        }*/
     }
 
     public void PauseGame(int i)
     {
-        if (SplitScreenCamera.isMulti && i == 1)
+        if (SplitScreenCamera.isMulti && i == 2)
+        {
+            pauseMenu2.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+        }
+        /*if (SplitScreenCamera.isMulti && i == 1)
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
@@ -73,7 +101,7 @@ public class PauseMenu : MonoBehaviour
             pauseMenu2.SetActive(true);
             Time.timeScale = 0f;
             isPaused = true;
-        }
+        }*/
     }
     
     public void MainMenu()
