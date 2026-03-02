@@ -6708,6 +6708,14 @@ PrefabInstance:
       propertyPath: turnSpeed
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 8658219617344954931, guid: 744bcb820e1f8ab4ea5243bbc1ff82e7, type: 3}
+      propertyPath: acceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658219617344954931, guid: 744bcb820e1f8ab4ea5243bbc1ff82e7, type: 3}
+      propertyPath: deceleration
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7344477027154719789, guid: 744bcb820e1f8ab4ea5243bbc1ff82e7, type: 3}
     - {fileID: 4724903441399947793, guid: 744bcb820e1f8ab4ea5243bbc1ff82e7, type: 3}
@@ -21244,6 +21252,8 @@ MonoBehaviour:
   moveSpeed: 10
   turnSpeed: 80
   actionSet: Move2
+  acceleration: 25
+  deceleration: 10
   minPitch: 0.8
   maxPitch: 2.5
 --- !u!114 &1126638391
