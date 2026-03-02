@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
-    public static int totalRacers = 3;
+    [SerializeField] public static int totalRacers = 3;
     [SerializeField] private int TotalLaps = 3;
     [SerializeField] private TMP_Text[] leaderboardTexts;
     [SerializeField] private GameObject leaderboard;
