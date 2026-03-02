@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float turnSpeed = 80f;
     [SerializeField] private string actionSet;
+    [SerializeField] private float acceleration = 25f;
+    [SerializeField] private float deceleration = 15f;
+
+    private float currentSpeed = 0f;
 
     private AudioSource engineSource;
     public float minPitch = 0.2f; // Sound when stopped
@@ -47,7 +51,20 @@ public class PlayerMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0f, yaw, 0f);
         rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, 0.8f));
 
-        Vector3 forward = transform.forward * forwardInput * moveSpeed * speedMultiplier * Time.fixedDeltaTime;
+        //Vector3 forward = transform.forward * forwardInput * moveSpeed * speedMultiplier * Time.fixedDeltaTime;
+        float targetSpeed = forwardInput * moveSpeed * speedMultiplier;
+
+        // Accelerate or decelerate toward target speed
+        if (Mathf.Abs(forwardInput) > 0.01f)
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
+        }
+        else
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0f, deceleration * Time.fixedDeltaTime);
+        }
+
+        Vector3 forward = transform.forward * currentSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + forward);
 
         rb.angularVelocity = Vector3.zero;
