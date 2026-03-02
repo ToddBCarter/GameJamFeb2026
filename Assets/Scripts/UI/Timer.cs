@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
-        elapsedTime = 0f;
+        //elapsedTime = 0f;
         isRunning = true;
     }
 

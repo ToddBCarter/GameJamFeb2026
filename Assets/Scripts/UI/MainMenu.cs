@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private int AIs = 1;
+    [SerializeField] private int AIs = 2;
     private void Awake()
     {
         SplitScreenCamera.isMulti = false;

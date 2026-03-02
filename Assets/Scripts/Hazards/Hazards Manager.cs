@@ -76,8 +76,9 @@ public class HazardsManager : MonoBehaviour
             Rigidbody rb = meteor.GetComponent<Rigidbody>();
             if(rb != null)
             {
-                rb.linearVelocity = Vector3.down * 30f;
-                rb.angularVelocity += new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
+                Vector3 horizontal = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
+                rb.linearVelocity = Vector3.down * 40f + horizontal;
+                rb.angularVelocity += new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
             }
         }
     }
