@@ -3,13 +3,18 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
-    [SerializeField] public static int totalRacers = 3;
+    public static int totalRacers = 2; 
     [SerializeField] private int TotalLaps = 3;
     [SerializeField] private TMP_Text[] leaderboardTexts;
     [SerializeField] private GameObject leaderboard;
     [SerializeField] private AudioClip victorySound;
     private int place = 0;
     private bool victorySequenceStarted = false;
+
+    void Start() //delete this later
+    {
+        Debug.Log("Total Racers at scene start: " + totalRacers);
+    }
 
     void Update()
     {
