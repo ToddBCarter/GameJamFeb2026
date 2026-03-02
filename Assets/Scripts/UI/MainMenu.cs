@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
     public void StartGameMulti()
     {
         FinishLine.totalRacers = AIs + 2;
+        //find a way to spawn player 2 maybe?
         SplitScreenCamera.isMulti = true;
         SceneManager.LoadScene(1);
     }
